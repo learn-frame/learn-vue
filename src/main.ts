@@ -1,18 +1,25 @@
-import Vue from 'vue'
+import './assets/base.css'
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
 import App from './App.vue'
 import router from './router'
-import store from './store'
-import vuetify from './plugins/vuetify'
-import './registerServiceWorker'
-import '@/assets/styles/global.css'
 
-Vue.config.productionTip = false
+const app = createApp(App)
 
-const vm = new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App),
-}).$mount('#app')
+app.use(createPinia())
+app.use(router)
+app.use(
+  createVuetify({
+    components,
+    directives,
+  }),
+)
 
-export default vm
+app.mount('#app')
